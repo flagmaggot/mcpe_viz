@@ -565,7 +565,7 @@ namespace mcpe_viz {
       }
         
       s = "\"Name\":";
-      if ( id >= 0 && id <= 255 ) {
+      if ( id >= 0 && id <= 512 ) { //fix?
         s += "\"" + getBlockName(id,damage) + "\"";
       } else {
         std::string iname = getItemName(id, damage);
@@ -605,7 +605,7 @@ namespace mcpe_viz {
 
       // check for icon image
       char urlImage[1025];
-      if ( id < 256 ) {
+      if ( id < 512 ) { //fix?
         sprintf(urlImage,"images/mcpe_viz.block.%d.%d.png", id, damage);
       } else {
         sprintf(urlImage,"images/mcpe_viz.item.%d.%d.png", id, damage);
@@ -613,7 +613,7 @@ namespace mcpe_viz {
 
       if ( ! file_exists(urlImage) ) {
         // check for non-variant
-        if ( id < 256 ) {
+        if ( id < 512 ) { //fix?
           sprintf(urlImage,"images/mcpe_viz.block.%d.%d.png", id, 0);
         } else {
           sprintf(urlImage,"images/mcpe_viz.item.%d.%d.png", id, 0);
@@ -660,7 +660,7 @@ namespace mcpe_viz {
         
       std::string s = "[";
 
-      if ( id >= 0 && id <= 255 ) {
+      if ( id >= 0 && id <= 512 ) { //fix?
         s += "Block:" + getBlockName(id,damage);
       } else {
         s += "Item:" + getItemName(id, damage);
@@ -870,7 +870,15 @@ namespace mcpe_viz {
         sprintf(tmpstring,"\"etype\":\"%s\"", entityInfoList[idShort]->etype.c_str());
         list.push_back(std::string(tmpstring));
       } else {
-        sprintf(tmpstring,"\"Name\":\"*UNKNOWN: id=%d 0x%x\"", idShort,idShort);
+		
+		//std::string identifier = "identifier";
+		//int32_t idFindFinallyy = findIdByIdentifier(entityInfoList, identifier);
+		
+		
+		  
+		
+        //sprintf(tmpstring,"\"Name\":\"*UNKNOWN1: id=%d 0x%x\"", idFindFinallyy,idFindFinallyy);
+		sprintf(tmpstring,"\"Name\":\"*UNKNOWN1: id=%d 0x%x\"", idShort,idShort);
         list.push_back(std::string(tmpstring));
       }
 
@@ -1549,7 +1557,21 @@ namespace mcpe_viz {
           logger.msg(kLogInfo1,"WARNING: Did not find idString for entity id (%s)\n", ids.c_str());
         }
       }
-      else {
+      else if(tc.has_key("identifier"))
+      {
+        std::string identifier = tc["identifier"].as<nbt::tag_string>().get();
+        int32_t idFindFinally = findIdByIdentifier(entityInfoList, identifier);
+		//slogger.msg(kLogWarning, "Identifier is: %s", identifier.c_str());
+          if(identifier != "minecraft:gravel"){
+            entity->idFull = idFindFinally;
+            entity->idShort = entity->idFull;// & 0xFF;
+          }
+		  else
+		  {
+		    entity->idFull = 0x0D;
+		    entity->idShort = entity->idFull;// & 0xFF;
+		  }
+      } else {
         // todonow -this appears to happen for maps
         logger.msg(kLogInfo1,"WARNING: Did not find id or idString for entity! Weird.\n");
       }
@@ -1772,7 +1794,12 @@ namespace mcpe_viz {
         
       // stuff I found:
       entity->checkOtherProp(tc, "SpawnedByNight");
+	  
+	  entity->checkOtherProp(tc, "identifier"); //fixed?
+	  entity->checkOtherProp(tc, "Name"); //fixed?
         
+
+		
       logger.msg(kLogInfo1, "%sParsedEntity: %s\n", dimName.c_str(), entity->toString(actualDimensionId).c_str());
 
       std::string geojson = entity->toGeoJSON(actualDimensionId);

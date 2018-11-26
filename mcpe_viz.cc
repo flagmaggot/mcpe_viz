@@ -250,7 +250,7 @@ namespace mcpe_viz {
   int32_t palRedBlackGreen[256];
 
   // info lists (from XML)
-  BlockInfo blockInfoList[256];
+  BlockInfo blockInfoList[512];
   ItemInfoList itemInfoList;
   EntityInfoList entityInfoList;
   BiomeInfoList biomeInfoList;
@@ -912,11 +912,24 @@ namespace mcpe_viz {
   }
 
 
+
   int32_t findIdString(const EntityInfoList &m, std::string& ids) {
     for (EntityInfoList::const_iterator it=m.begin(); it!=m.end(); ++it)
       if ( it->second->idString == ids ) {
         return it->first;
       }
+    return -1;
+  }
+  
+  int32_t findIdByIdentifier(const EntityInfoList &m, std::string& k){
+    for (EntityInfoList::const_iterator it=m.begin(); it!=m.end(); ++it)
+    {
+ 	  std::string test = it->second->idString;
+   	  std::transform(test.begin(), test.end(), test.begin(), ::tolower);
+    if ( test == k ) {
+ 	  return it->first;
+    }
+    }
     return -1;
   }
   
@@ -1009,7 +1022,7 @@ namespace mcpe_viz {
       }
     }
     
-    slogger.msg(kLogWarning, "getItemName failed to find id=%d extradata=%d\n", id, extraData);
+    //slogger.msg(kLogWarning, "getItemName1 failed to find id=%d extradata=%d\n", id, extraData);
     char tmpstring[256];
     sprintf(tmpstring,"(Unknown-item-id-%d-data-%d)", id, extraData);
     return std::string(tmpstring);

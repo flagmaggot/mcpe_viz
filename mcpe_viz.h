@@ -172,7 +172,7 @@ namespace mcpe_viz {
     }
   };
   
-  extern BlockInfo blockInfoList[256];
+  extern BlockInfo blockInfoList[512];
 
   //BlockInfo* getBlockInfo(int32_t id, int32_t blockData);
   std::string getBlockName(int32_t id, int32_t blockdata);
@@ -263,7 +263,7 @@ namespace mcpe_viz {
   extern EntityInfoList entityInfoList;
   bool has_key(const EntityInfoList &m, int32_t k);
   int32_t findIdString(const EntityInfoList &m, std::string& ids);
-
+  int32_t findIdByIdentifier(const EntityInfoList &m, std::string& identifier);
 
   class BiomeInfo {
   public:
