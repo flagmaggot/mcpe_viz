@@ -264,6 +264,9 @@ namespace mcpe_viz {
   bool has_key(const EntityInfoList &m, int32_t k);
   int32_t findIdString(const EntityInfoList &m, std::string& ids);
   int32_t findIdByIdentifier(const EntityInfoList &m, std::string& identifier);
+  int32_t findIdByItemName(std::string& identifier);
+  int32_t findIdByBlockName(std::string& identifier);
+  void capEachWord(std::string& strToConvert);
 
   class BiomeInfo {
   public:

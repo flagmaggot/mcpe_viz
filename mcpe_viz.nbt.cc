@@ -663,6 +663,7 @@ namespace mcpe_viz {
       if ( id >= 0 && id <= 512 ) { //fix?
         s += "Block:" + getBlockName(id,damage);
       } else {
+        //slogger.msg(kLogWarning, "Finding id: %d damage: %d\n", id, damage);
         s += "Item:" + getItemName(id, damage);
       }
 
@@ -1856,13 +1857,34 @@ namespace mcpe_viz {
           tileEntity->addSign(tc);
           parseFlag = true;
         }
-        else if ( tileEntity->id == "Chest" ) {
+        else if ( tileEntity->id == "Chest" ) { //chest
+          
           if ( tc.has_key("Items", nbt::tag_type::List) ) {
             tileEntity->containerFlag = true;
             nbt::tag_list items = tc["Items"].as<nbt::tag_list>();
+            
             for ( const auto& iter: items ) {
               nbt::tag_compound iitem = iter.as<nbt::tag_compound>();
               tileEntity->addItem(iitem);
+
+              std::string name = iitem["Name"].as<nbt::tag_string>().get(); //flagmaggot the name is present
+              //if(name == "minecraft:gold_block")
+
+              int32_t idFindFinally = findIdByBlockName(name);
+              if(idFindFinally == 0)
+              {
+                findIdByIdentifier(entityInfoList,name);
+
+                if(idFindFinally == 0)
+                {
+                  findIdByItemName(name);
+                  //slogger.msg(kLogWarning, "Item name: %s item id: %d\n", name.c_str(), idFindFinally);
+                }
+
+                
+              }
+              
+              
             }
             parseFlag = true;
           }
@@ -2042,6 +2064,8 @@ namespace mcpe_viz {
       
     return 0;
   }
+
+
 
 
 

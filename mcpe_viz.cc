@@ -221,7 +221,7 @@
 #include "mcpe_viz.h"
 #include "mcpe_viz.nbt.h"
 #include "mcpe_viz.xml.h"
-
+#include <regex>
 
 namespace mcpe_viz {
   // todo - removed anonymous namespace here
@@ -924,13 +924,112 @@ namespace mcpe_viz {
   int32_t findIdByIdentifier(const EntityInfoList &m, std::string& k){
     for (EntityInfoList::const_iterator it=m.begin(); it!=m.end(); ++it)
     {
- 	  std::string test = it->second->idString;
+ 	    std::string test = it->second->idString;
    	  std::transform(test.begin(), test.end(), test.begin(), ::tolower);
-    if ( test == k ) {
- 	  return it->first;
-    }
+      if ( test == k ) {
+ 	      return it->first;
+      }
     }
     return -1;
+  }
+
+  int32_t findIdByItemName(std::string& k){
+    int32_t temp = 0;
+    //for (const auto& it : itemInfoList ) {
+      for ( const auto& iter : itemInfoList) {
+       //slogger.msg(kLogWarning, "Looping %d\n", iter.first);
+      //for ( const auto& iter : itemInfoList[id]->variantList ) {
+      // for ( const auto& u : it.variantList ) {
+      //   if ( u == k ) {
+      //    temp = it.id;
+      //   }
+      // }
+      // for ( const auto& iter : it.second->variantList ) {
+      //   slogger.msg(kLogWarning, "Looping\n");
+      //     // if ( iter->extraData == extraData ) {
+      //     //   // found variant
+      //     //   return iter->name;
+      //     // }
+      //     if(iter.id == k)
+      //     {
+
+      //     }
+      //   }
+      std::string tempstring = k;
+
+      std::regex pattern("minecraft:");
+      tempstring = std::regex_replace(tempstring, pattern, "");
+      pattern = "_";
+      tempstring = std::regex_replace(tempstring, pattern, " ");
+      capEachWord(tempstring);
+      //slogger.msg(kLogWarning, "Word is:   %s\n", tempstring.c_str());
+      //slogger.msg(kLogWarning, "Entity is: %s\n", iter.second->name.c_str());
+      if(tempstring == iter.second->name)
+      {
+        slogger.msg(kLogWarning, "Word is: %s %d\n", tempstring.c_str(), iter.second->extraData);
+        temp = iter.second->extraData;
+      }
+
+    }
+      if(temp != 0)
+        return temp;
+      else
+      return 0;
+  }
+
+void capEachWord(std::string& strToConvert)
+{
+  //Identifies if the current word has been capitalized.
+  //Set to false by default.
+  bool thisWordCapped = false;
+  //Turn all letters lowercase
+  //lowerCase(strToConvert);
+
+     for(unsigned int i=0;i<strToConvert.length();i++)
+   {
+      strToConvert[i] = tolower(strToConvert[i]);
+   }
+
+  for (unsigned int i=0; i<strToConvert.length();i++)
+  {
+     //At a space or punctuation mark, the current word has ended.
+     //We are now on a new word that has not yet been capitalized,
+     //so thisWordCapped is set to false.
+    if ((ispunct(strToConvert[i])) || (isspace(strToConvert[i])))
+      thisWordCapped = false;
+
+     //If current word has not been capitalized AND the current character
+     //is a letter, uppercase the letter. The word is now capitalized, so
+     //thisWordCapped is set to true, and will not be set to false until
+     //a space or punctuation is found.
+    if ((thisWordCapped==false) && (isalpha(strToConvert[i])))
+    {
+      strToConvert[i]=toupper(strToConvert[i]);
+      thisWordCapped = true;
+    }
+
+  }
+
+}
+
+
+
+
+  int32_t findIdByBlockName(std::string& k){
+    int32_t temp = 0;
+    for (const auto& it : blockInfoList ) {
+      for ( const auto& u : it.unameList ) {
+        if ( u == k ) {
+         temp = it.id;
+        }
+      }
+      
+
+    }
+      if(temp != 0)
+        return temp;
+      else
+      return 0;
   }
   
 
@@ -1024,7 +1123,7 @@ namespace mcpe_viz {
     
     //slogger.msg(kLogWarning, "getItemName1 failed to find id=%d extradata=%d\n", id, extraData);
     char tmpstring[256];
-    sprintf(tmpstring,"(Unknown-item-id-%d-data-%d)", id, extraData);
+    sprintf(tmpstring,"(Unknown-item-id-%d-data-%d)", id, extraData); //flagmaggot - can't find items in chest
     return std::string(tmpstring);
   }
   
