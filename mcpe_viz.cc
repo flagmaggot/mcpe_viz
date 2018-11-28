@@ -967,9 +967,7 @@ namespace mcpe_viz {
       if(tempstring == iter.second->name)
       {
         slogger.msg(kLogWarning, "Word is: %s %d\n", tempstring.c_str(), iter.first);
-        temp = iter.second->extraData;
-
-       
+        temp = iter.first;
       }
 
     }
