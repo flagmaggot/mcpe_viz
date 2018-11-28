@@ -966,8 +966,10 @@ namespace mcpe_viz {
       //slogger.msg(kLogWarning, "Entity is: %s\n", iter.second->name.c_str());
       if(tempstring == iter.second->name)
       {
-        slogger.msg(kLogWarning, "Word is: %s %d\n", tempstring.c_str(), iter.second->extraData);
+        slogger.msg(kLogWarning, "Word is: %s %d\n", tempstring.c_str(), iter.first);
         temp = iter.second->extraData;
+
+       
       }
 
     }
