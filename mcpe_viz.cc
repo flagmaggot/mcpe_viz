@@ -966,7 +966,7 @@ namespace mcpe_viz {
       //slogger.msg(kLogWarning, "Entity is: %s\n", iter.second->name.c_str());
       if(tempstring == iter.second->name)
       {
-        slogger.msg(kLogWarning, "Word is: %s %d\n", tempstring.c_str(), iter.first);
+        //slogger.msg(kLogWarning, "Word is: %s %d\n", tempstring.c_str(), iter.first);
         temp = iter.first;
       }
 
@@ -1098,8 +1098,14 @@ void capEachWord(std::string& strToConvert)
         return blockInfoList[id].name;
       }
     }
-    
-    slogger.msg(kLogWarning, "getBlockName failed to find id=%d blockdata=%d\n", id, blockdata);
+
+    if(id >0 && id<=512)
+    {
+        std::string temp = getItemName(id,blockdata);
+        //slogger.msg(kLogWarning, "getBlockName found Item Name=%s\n", temp.c_str());
+        return temp;
+    }
+    //slogger.msg(kLogWarning, "getBlockName failed to find id=%d blockdata=%d\n", id, blockdata);
     char tmpstring[256];
     sprintf(tmpstring,"(Unknown-block-id-%d-data-%d)", id, blockdata);
     return std::string(tmpstring);
@@ -1115,16 +1121,30 @@ void capEachWord(std::string& strToConvert)
           }
         }
         // todo err
-        slogger.msg(kLogWarning, "getItemName failed to find variant id=%d extradata=%d\n", id, extraData);
+       
       } else {
+        slogger.msg(kLogWarning, "getItemName failed to find variant id=%d x=%x extradata=%s\n", id, id, itemInfoList[id]->name.c_str());
         return itemInfoList[id]->name;
       }
     }
+
+
     
     //slogger.msg(kLogWarning, "getItemName1 failed to find id=%d extradata=%d\n", id, extraData);
     char tmpstring[256];
-    sprintf(tmpstring,"(Unknown-item-id-%d-data-%d)", id, extraData); //flagmaggot - can't find items in chest
-    return std::string(tmpstring);
+    if(id > 0)
+    {
+      //std::string uname = itemInfoList[id]->name;
+      sprintf(tmpstring,"(Unknown-item2-id-%d-data-%d)", id, extraData); //flagmaggot - can't find items in chest
+      slogger.msg(kLogWarning, "SOMETHING WRONG id=%d extradata=%d\n", id, extraData);
+      return std::string(tmpstring);
+      
+    }
+    else 
+    {
+      sprintf(tmpstring,"(Unknown-item3-id-%d-data-%d)", id, extraData); //flagmaggot - can't find items in chest
+      return std::string(tmpstring);
+    }
   }
   
   

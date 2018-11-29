@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <fstream>
 #include <algorithm>
+#include <regex>
 
 #if defined(__APPLE__) || defined(__FreeBSD__)
 #include <cmath>
@@ -513,9 +514,58 @@ namespace mcpe_viz {
       if ( iitem.has_key("Slot", nbt::tag_type::Byte) ) {
         slot = iitem["Slot"].as<nbt::tag_byte>().get();
       }
-      if ( iitem.has_key("id", nbt::tag_type::Short) ) {
+      if ( iitem.has_key("id", nbt::tag_type::Short) ) 
+      {
         id = iitem["id"].as<nbt::tag_short>().get();
       }
+
+      if ( iitem.has_key("Name", nbt::tag_type::String) ) 
+      {
+        //id = iitem["id"].as<nbt::tag_short>().get();
+        std::string name = iitem["Name"].as<nbt::tag_string>().get();
+
+        if(name != "")
+        {
+          int32_t idFindFinally = findIdByBlockName(name);
+          if(idFindFinally <= 0)
+          {
+            idFindFinally = findIdByIdentifier(entityInfoList,name);
+
+            if(idFindFinally <= 0)
+            {
+              idFindFinally = findIdByItemName(name);
+            }
+          }
+          id = idFindFinally;
+          //slogger.msg(kLogError,"id name: %s id: %d\n", name.c_str(), id);
+        }
+
+        //slogger.msg(kLogError,"id name: %s\n", name.c_str());
+      }
+
+
+      // else
+      // {
+        
+      //   if(id == -1)
+      //   {
+      //       std::string name = iitem["Name"].as<nbt::tag_string>().get();
+      //       int32_t idFindFinally = findIdByBlockName(name);
+      //         if(idFindFinally <= 0)
+      //         {
+      //           idFindFinally = findIdByIdentifier(entityInfoList,name);
+
+      //           if(idFindFinally <= 0)
+      //           {
+      //             idFindFinally = findIdByItemName(name);
+      //           }
+      //           slogger.msg(kLogError,"id name: %s\n", name.c_str());
+      //         }
+      //         id = idFindFinally;
+      //   }
+      // }
+
+
 
       // todo - other fields? 
 
@@ -563,13 +613,41 @@ namespace mcpe_viz {
           return std::string("");
         }
       }
-        
+      
+      //flagmaggot here is where chests don't show items
       s = "\"Name\":";
       if ( id >= 0 && id <= 512 ) { //fix?
-        s += "\"" + getBlockName(id,damage) + "\"";
-      } else {
+        std::string checkUnknown = getBlockName(id,damage);
+        //slogger.msg(kLogWarning, "checkUnknown : %s\n", checkUnknown.c_str());
+        if(checkUnknown.find("(Unknown-block-id"))
+        {
+           
+            //flagmaggot lame i know but check if its an item
+            std::string iname = getItemName(id, damage);
+            s += "\"" + iname + "\"";
+
+            if ( showCountFlag && count >= 0 ) {
+              sprintf(tmpstring,"\"imgid\":\"%d\"", id);
+              
+              list.push_back(std::string(tmpstring));
+              sprintf(tmpstring,"\"Damage\":\"%d\"", damage);
+              list.push_back(std::string(tmpstring));
+            }
+            //slogger.msg(kLogWarning, "it's unknown block id=%d name: %s\n",id, iname.c_str());
+        }
+        else
+        {
+          s += "\"" + getBlockName(id,damage) + "\"";
+          slogger.msg(kLogWarning, "No clue\n");
+        }
+      } 
+      
+      
+      else {
         std::string iname = getItemName(id, damage);
         s += "\"" + iname + "\"";
+
+         //slogger.msg(kLogWarning, "FUCK id=%d name: %s\n",id, iname.c_str());
       }
       list.push_back(s);
 
@@ -606,21 +684,25 @@ namespace mcpe_viz {
       // check for icon image
       char urlImage[1025];
       if ( id < 512 ) { //fix?
-        sprintf(urlImage,"images/mcpe_viz.block.%d.%d.png", id, damage);
+        sprintf(urlImage,"./images/mcpe_viz.block.%d.%d.png", id, damage);
       } else {
-        sprintf(urlImage,"images/mcpe_viz.item.%d.%d.png", id, damage);
+        sprintf(urlImage,"./images/mcpe_viz.item.%d.%d.png", id, damage);
       }
 
+//      slogger.msg(kLogWarning, "urlImage: %s\n",urlImage);
+
       if ( ! file_exists(urlImage) ) {
+        
+
         // check for non-variant
         if ( id < 512 ) { //fix?
-          sprintf(urlImage,"images/mcpe_viz.block.%d.%d.png", id, 0);
+          sprintf(urlImage,"./images/mcpe_viz.block.%d.%d.png", id, 0);
         } else {
-          sprintf(urlImage,"images/mcpe_viz.item.%d.%d.png", id, 0);
+          sprintf(urlImage,"./images/mcpe_viz.item.%d.%d.png", id, 0);
         }
       }
       
-      if ( file_exists(dirExec + "/" + urlImage) ) {
+      if ( file_exists(dirExec + "./" + urlImage) ) {
         std::string fImage(urlImage);
         int32_t imgId = -1;
         if ( has_key(imageFileMap, fImage) ) {
@@ -872,14 +954,8 @@ namespace mcpe_viz {
         list.push_back(std::string(tmpstring));
       } else {
 		
-		//std::string identifier = "identifier";
-		//int32_t idFindFinallyy = findIdByIdentifier(entityInfoList, identifier);
-		
-		
-		  
-		
-        //sprintf(tmpstring,"\"Name\":\"*UNKNOWN1: id=%d 0x%x\"", idFindFinallyy,idFindFinallyy);
-		sprintf(tmpstring,"\"Name\":\"*UNKNOWN1: id=%d 0x%x\"", idShort,idShort);
+
+		    sprintf(tmpstring,"\"Name\":\"*UNKNOWN1: id=%d 0x%x\"", idShort,idFull);
         list.push_back(std::string(tmpstring));
       }
 
@@ -1865,26 +1941,38 @@ namespace mcpe_viz {
             
             for ( const auto& iter: items ) {
               nbt::tag_compound iitem = iter.as<nbt::tag_compound>();
-              tileEntity->addItem(iitem);
+              
 
               std::string name = iitem["Name"].as<nbt::tag_string>().get(); //flagmaggot the name is present
               //if(name == "minecraft:gold_block")
 
               int32_t idFindFinally = findIdByBlockName(name);
-              if(idFindFinally == 0)
+              if(idFindFinally <= 0)
               {
-                findIdByIdentifier(entityInfoList,name);
+                idFindFinally = findIdByIdentifier(entityInfoList,name);
 
-                if(idFindFinally == 0)
+                if(idFindFinally <= 0)
                 {
-                  findIdByItemName(name);
-                  //slogger.msg(kLogWarning, "Item name: %s item id: %d\n", name.c_str(), idFindFinally);
+                  idFindFinally = findIdByItemName(name);
                 }
-
                 
               }
-              
-              
+              //  slogger.msg(kLogWarning, "Word is: %s %d\n", tempstring.c_str(), iter.first);
+
+              std::string tempstring = name;
+
+              std::regex pattern("minecraft:");
+              tempstring = std::regex_replace(tempstring, pattern, "");
+              pattern = "_";
+              tempstring = std::regex_replace(tempstring, pattern, " ");
+              capEachWord(tempstring);
+
+              //iitem["Name"] = tempstring.c_str();
+              iitem["id"] = idFindFinally;
+              //id = idFindFinally;
+              tileEntity->addItem(iitem);
+              //slogger.msg(kLogWarning, "Original word is: %s \n", iitem["Name"].as<nbt::tag_string>().get().c_str());
+              //slogger.msg(kLogWarning, "Word is: %s id is: %d\n", tempstring.c_str(), iitem["id"].as<nbt::tag_int>().get());
             }
             parseFlag = true;
           }
