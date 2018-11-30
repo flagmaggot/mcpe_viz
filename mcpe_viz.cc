@@ -912,6 +912,21 @@ namespace mcpe_viz {
   }
 
 
+  std::string findStringByID(const EntityInfoList &m, int32_t id)
+  {
+    
+    std::string test = "";
+    for (EntityInfoList:: const_iterator it=m.begin(); it!=m.end(); ++it)
+    {
+      if(it->first==id)
+      {
+        test = it->second->name;
+        slogger.msg(kLogWarning, "name: %s id: %d first: %d\n", test.c_str(), id, it->first);
+      }
+    }
+    return test;
+  }
+
 
   int32_t findIdString(const EntityInfoList &m, std::string& ids) {
     for (EntityInfoList::const_iterator it=m.begin(); it!=m.end(); ++it)
@@ -976,19 +991,40 @@ namespace mcpe_viz {
       else
       return 0;
   }
+  
+  int32_t findIdByBlockName2(std::string& k){
+    int32_t temp = 0;
+    for ( const auto& iter : blockInfoList) {
+
+    std::string tempstring = k;
+
+    std::regex pattern("minecraft:");
+    tempstring = std::regex_replace(tempstring, pattern, "");
+    pattern = "_";
+    tempstring = std::regex_replace(tempstring, pattern, " ");
+    capEachWord(tempstring);
+    //slogger.msg(kLogWarning, "Word is:   %s\n", tempstring.c_str());
+    //slogger.msg(kLogWarning, "Entity is: %s\n", iter.second->name.c_str());
+    if(tempstring == iter.name)
+    {
+    slogger.msg(kLogWarning, "Word is: %s %s\n", tempstring.c_str(), iter.name.c_str());
+    //temp = iter.first;
+    }
+
+    }
+    if(temp != 0)
+    return temp;
+    else
+    return 0;
+  }
 
 void capEachWord(std::string& strToConvert)
 {
-  //Identifies if the current word has been capitalized.
-  //Set to false by default.
   bool thisWordCapped = false;
-  //Turn all letters lowercase
-  //lowerCase(strToConvert);
-
-     for(unsigned int i=0;i<strToConvert.length();i++)
-   {
-      strToConvert[i] = tolower(strToConvert[i]);
-   }
+  for(unsigned int i=0;i<strToConvert.length();i++)
+  {
+   	strToConvert[i] = tolower(strToConvert[i]);
+  }
 
   for (unsigned int i=0; i<strToConvert.length();i++)
   {
@@ -1007,9 +1043,7 @@ void capEachWord(std::string& strToConvert)
       strToConvert[i]=toupper(strToConvert[i]);
       thisWordCapped = true;
     }
-
   }
-
 }
 
 
@@ -1099,12 +1133,13 @@ void capEachWord(std::string& strToConvert)
       }
     }
 
-    if(id >0 && id<=512)
-    {
-        std::string temp = getItemName(id,blockdata);
-        //slogger.msg(kLogWarning, "getBlockName found Item Name=%s\n", temp.c_str());
-        return temp;
-    }
+  //flagmaggot item issue
+    // if(id >0 && id<=512)
+    // {
+    //     std::string temp = getItemName(id,blockdata);
+    //     //slogger.msg(kLogWarning, "getBlockName found Item Name=%s\n", temp.c_str());
+    //     return temp;
+    // }
     //slogger.msg(kLogWarning, "getBlockName failed to find id=%d blockdata=%d\n", id, blockdata);
     char tmpstring[256];
     sprintf(tmpstring,"(Unknown-block-id-%d-data-%d)", id, blockdata);
@@ -1123,22 +1158,16 @@ void capEachWord(std::string& strToConvert)
         // todo err
        
       } else {
-        slogger.msg(kLogWarning, "getItemName failed to find variant id=%d x=%x extradata=%s\n", id, id, itemInfoList[id]->name.c_str());
+        //slogger.msg(kLogWarning, "getItemName failed to find variant id=%d x=%x extradata=%s\n", id, id, itemInfoList[id]->name.c_str());
         return itemInfoList[id]->name;
       }
     }
 
-
-    
-    //slogger.msg(kLogWarning, "getItemName1 failed to find id=%d extradata=%d\n", id, extraData);
     char tmpstring[256];
     if(id > 0)
     {
-      //std::string uname = itemInfoList[id]->name;
-      sprintf(tmpstring,"(Unknown-item2-id-%d-data-%d)", id, extraData); //flagmaggot - can't find items in chest
-      slogger.msg(kLogWarning, "SOMETHING WRONG id=%d extradata=%d\n", id, extraData);
-      return std::string(tmpstring);
-      
+      std::string temp = findStringByID(entityInfoList, id);
+      return temp.c_str();
     }
     else 
     {
