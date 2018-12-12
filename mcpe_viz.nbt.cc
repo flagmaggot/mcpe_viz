@@ -623,10 +623,6 @@ namespace mcpe_viz {
       bool isBlock = false;
       if ( id >= 0 && id <= 512 ) 
       { //fix?
-          //iname = getBlockName(id,damage);
-          //inameCheck = getItemName(id, damage);
-          //slogger.msg(kLogWarning, "Name: %s Block: %s Item: %s id:%d\n", name.c_str(), iname.c_str(), inameCheck.c_str(), id);
-         // slogger.msg(kLogWarning, "Name: %s Block: %s Item: %s id:%d\n", name.c_str(), iname.c_str(), inameCheck.c_str(), id);
 
         std::string tempstring = name;
         std::regex pattern("minecraft:");
@@ -641,18 +637,6 @@ namespace mcpe_viz {
         {
           isBlock = true;
         }
-          // if(iname.find('(') != std::string::npos)
-          // {
-          //   iname = getItemName(id, damage);
-          //   s += "\"" + iname + "\"";
-          // }
-          // else
-          // {
-          //   iname = getBlockName(id,damage);
-          //   s += "\"" + iname + "\"";
-          //   isBlock = true;
-          // }
-        
       } 
       else {
         iname = getItemName(id, damage);
