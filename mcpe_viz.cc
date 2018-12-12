@@ -4405,7 +4405,7 @@ void capEachWord(std::string& strToConvert)
 
       leveldb::Iterator* iter = db->NewIterator(levelDbReadOptions);
       for (iter->SeekToFirst(); iter->Valid(); iter->Next()) {
-
+        //slogger.msg(kLogInfo1, "Processing\n");
         // note: we get the raw buffer early to avoid overhead (maybe?)
         skey = iter->key();
         key_size = (int)skey.size();
@@ -4414,6 +4414,9 @@ void capEachWord(std::string& strToConvert)
         svalue = iter->value();
         cdata_size = svalue.size();
         cdata = svalue.data();
+
+        //std::string keyString2(key, key_size);
+        //slogger.msg(kLogInfo1,"key_size: %zu\n", key_size);
 
         ++recordCt;
         if ( control.shortRunFlag && recordCt > 1000 ) {
@@ -4645,7 +4648,7 @@ void capEachWord(std::string& strToConvert)
             chunkstr+=tmpstring;
           }
           logger.msg(kLogInfo1, "%s\n", chunkstr.c_str());
-
+          //slogger.msg(kLogInfo1,"ChunkString: %s ChunkType: %d: \n",chunkstr.c_str() chunkType);
           // see what kind of chunk we have
           // tommo posted useful info about the various record types here (around 0.17 beta):
           //   https://www.reddit.com/r/MCPE/comments/5cw2tm/level_format_changes_in_mcpe_0171_100/
@@ -4661,11 +4664,16 @@ void capEachWord(std::string& strToConvert)
           case 0x31:
             // "BlockEntity"
             // tile entity record (e.g. a chest)
+            //slogger.msg(kLogInfo1,"Failing\n");
             logger.msg(kLogInfo1,"%s 0x31 chunk (tile entity data):\n", dimName.c_str());
+
+           // slogger.msg(kLogInfo1,"cdata: %s cdata_size: %zu\n", cdata, cdata_size);
+
             ret = parseNbt("0x31-te: ", cdata, cdata_size, tagList);
             if ( ret == 0 ) { 
               parseNbt_tileEntity(chunkDimId, dimName+"-", tagList);
             }
+            
             break;
 
           case 0x32:
@@ -4745,8 +4753,9 @@ void capEachWord(std::string& strToConvert)
             {
               // this record is not very interesting, we usually hide it
               // note: it would be interesting if this is not == 2 (as of MCPE 0.12.x it is always 2)
+              
               if ( control.verboseFlag || ((cdata[0] != 2) && (cdata[0] != 3)) ) { 
-                if ( cdata[0] != 2 ) { 
+                if ( cdata[0] != 2 && (cdata[0] != 9) ) { 
                   logger.msg(kLogInfo1,"WARNING: UNKNOWN CHUNK VERSION!  %s 0x76 chunk (world format version): v=%d\n", dimName.c_str(), (int)(cdata[0]));
                 } else {
                   logger.msg(kLogInfo1,"%s 0x76 chunk (world format version): v=%d\n", dimName.c_str(), (int)(cdata[0]));

@@ -407,6 +407,14 @@
       <blockvariant blockdata="0x5" name="Stairs, Spruce Wood, West (Upside-down)" spawnable="1" />
       <blockvariant blockdata="0x6" name="Stairs, Spruce Wood, South (Upside-down)" spawnable="1" />
       <blockvariant blockdata="0x7" name="Stairs, Spruce Wood, North (Upside-down)" spawnable="1" />
+	  <blockvariant blockdata="0x8" name="Stairs, Spruce Wood, North (Upside-down)" spawnable="1" />
+	  <blockvariant blockdata="0x9" name="Stairs, Spruce Wood" spawnable="1" />
+	  <blockvariant blockdata="0xA" name="Stairs, Spruce Wood" spawnable="1" />
+	  <blockvariant blockdata="0xB" name="Stairs, Spruce Wood" spawnable="1" />
+	  <blockvariant blockdata="0xC" name="Stairs, Spruce Wood" spawnable="1" />
+	  <blockvariant blockdata="0xD" name="Stairs, Spruce Wood" spawnable="1" />
+	  <blockvariant blockdata="0xE" name="Stairs, Spruce Wood" spawnable="1" />
+	  <blockvariant blockdata="0xF" name="Stairs, Spruce Wood" spawnable="1" />
     </block>
     <block id="0x87" name="Stairs, Birch Wood" uname="minecraft:birch_stairs" color="0x696d2d" spawnable="0"> <!-- *S -->
       <blockvariant blockdata="0x0" name="Stairs, Birch Wood, East" />
@@ -417,6 +425,14 @@
       <blockvariant blockdata="0x5" name="Stairs, Birch Wood, West (Upside-down)" spawnable="1" />
       <blockvariant blockdata="0x6" name="Stairs, Birch Wood, South (Upside-down)" spawnable="1" />
       <blockvariant blockdata="0x7" name="Stairs, Birch Wood, North (Upside-down)" spawnable="1" />
+	  <blockvariant blockdata="0x8" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0x9" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0xA" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0xB" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0xC" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0xD" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0xE" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0xF" name="Stairs, Birch Wood" spawnable="1" />
     </block>
     <block id="0x88" name="Stairs, Jungle Wood" uname="minecraft:jungle_stairs" color="0x696e2d" spawnable="0"> <!-- *S -->
       <blockvariant blockdata="0x0" name="Stairs, Jungle Wood, East" />
@@ -427,6 +443,14 @@
       <blockvariant blockdata="0x5" name="Stairs, Jungle Wood, West (Upside-down)" spawnable="1" />
       <blockvariant blockdata="0x6" name="Stairs, Jungle Wood, South (Upside-down)" spawnable="1" />
       <blockvariant blockdata="0x7" name="Stairs, Jungle Wood, North (Upside-down)" spawnable="1" />
+	  <blockvariant blockdata="0x8" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0x9" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0xA" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0xB" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0xC" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0xD" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0xE" name="Stairs, Birch Wood" spawnable="1" />
+	  <blockvariant blockdata="0xF" name="Stairs, Birch Wood" spawnable="1" />
     </block>
     <block id="0x8a" name="Beacon" uname="minecraft:beacon" color="0x8989ca" opaque="0" spawnable="0" /> <!-- 0.17 --> <!-- todo check opaque / spawn -->
     <block id="0x8B" name="Cobblestone Wall" uname="minecraft:cobblestone_wall" color="0xb0b0b0" opaque="0" spawnable="0">
@@ -452,6 +476,8 @@
     <block id="0x8D" name="Carrot" uname="minecraft:carrots" color="0xe8a03a" solid="0" opaque="0" spawnable="0" />  <!-- *S *I -->
     <block id="0x8E" name="Potato" uname="minecraft:potatoes" color="0xb4af1c" solid="0" opaque="0" spawnable="0" /> <!-- *S *I -->
     <block id="0x8F" name="Button, Wooden" uname="minecraft:oak_button;minecraft:wooden_button" color="0xcfbe7a" solid="0" opaque="0" spawnable="0" /> <!-- *S 0.13 -->
+	<block id="0x18C" name="Button, Birch" uname="minecraft:birch_button" color="0xcfbe7a" solid="0" opaque="0" spawnable="0" />
+	<block id="0x18F" name="Button, Spruce" uname="minecraft:spruce_button" color="0xcfbe7a" solid="0" opaque="0" spawnable="0" />
     <block id="0x90" name="Mob Head" uname="minecraft:skull" color="0xe030e0" solid="0"> <!-- *I *S *E 0.13 todo - parse type and direction etc -->
       <blockvariant blockdata="0x01" name="Mob Head, On the floor" />
       <blockvariant blockdata="0x02" name="Mob Head, On a wall, facing North" />
@@ -492,8 +518,12 @@
       <blockvariant blockdata="0x0" name="Quartz" />
       <blockvariant blockdata="0x1" name="Quartz, Chiseled" />
       <blockvariant blockdata="0x2" name="Quartz, Pillar (Vertical)" />
+	  <blockvariant blockdata="0x3" name="Quartz, Smooth" />
+	  <blockvariant blockdata="0x5" name="Quartz, Chiseled (East/West)" />
       <blockvariant blockdata="0x6" name="Quartz, Pillar (East/West)" />
       <blockvariant blockdata="0xa" name="Quartz, Pillar (North/South)" />
+	  <blockvariant blockdata="0xd" name="Quartz, Chiseled (all side texture)" />
+	  <blockvariant blockdata="0xe" name="Quartz, Pillar (all side texture)" />
     </block>
     <block id="0x9C" name="Stairs, Quartz" uname="minecraft:quartz_stairs" color="0xe8e7e7" spawnable="0"> <!-- *S -->
       <blockvariant blockdata="0x0" name="Stairs, Quartz, East" />
@@ -652,7 +682,7 @@
       <blockvariant blockdata="0xE" color="0xff00ff" name="Unknown Tall Flower (0xE)" />
       <blockvariant blockdata="0xF" color="0xfd00fc" name="Unknown Tall Flower (0xF)" />
     </block>
-    <block id="0xB0" name="Standing Banner" uname="minecraft:standing_banner" color="0xe36731" solid="0" opaque="0" spawnable="0" />
+    <block id="0xB0" name="StandingStanding Banner" uname="minecraft:standing_banner" color="0xe36731" solid="0" opaque="0" spawnable="0" />
     <block id="0xB1" name="Wall Banner" uname="minecraft:wall_banner" color="0xe36731" solid="0" opaque="0" spawnable="0" />
     <block id="0xB2" name="Daylight Sensor, Inverted" uname="minecraft:daylight_detector_inverted" color="0x989897" opaque="0" spawnable="0" /> <!-- *E 0.13 -->
     <block id="0xB3" name="Red Sandstone" uname="minecraft:red_sandstone" color="0xd0be86"> <!-- *B -->
@@ -851,7 +881,7 @@
 		<blockvariant blockdata="0x0" name="Sea Grass" />
 		<blockvariant blockdata="0x1" name="Sea Grass" />
 		<blockvariant blockdata="0x2" name="Sea Grass" />
-		</block>
+	</block>
 	<block id="0x182" name="Coral" uname="minecraft:coral" color="0x0e1c40" opaque="0" spawnable="0" />
 	<block id="0x183" name="Coral Block" uname="minecraft:coral_block" color="0x0e1c40" opaque="0" spawnable="0" />
 	<block id="0x184" name="Coral Fan" uname="minecraft:coral_fan" color="0x0e1c40" opaque="0" spawnable="0" />
@@ -890,11 +920,16 @@
 	<block id="0x197" name="Dark Oak Pressure Plate" uname="minecraft:dark_oak_pressure_plate" color="0x69732c" opaque="0" spawnable="0" />
 	<block id="0x198" name="Jungle Pressure Plate" uname="minecraft:jungle_pressure_plate" color="0x696e2d" opaque="0" spawnable="0" />
 	<block id="0x199" name="Spruce Pressure Plate" uname="minecraft:spruce_pressure_plate" color="0x696c2d" opaque="0" spawnable="0" />
+	<block id="0x19A" name="Carved Pumpkin" uname="minecraft:carved_pumpkin" color="0xfe9300" />  <!-- *S -->
+	<block id="0x19B" name="Sea Pickle" uname="minecraft:sea_pickle" color="0x060602" opaque="0" spawnable="0" />
+	<block id="0x19E" name="Turtle Egg" uname="minecraft:turtle_egg" color="0xe6e6fa" />
+	<block id="0x19F" name="Bubble Column" uname="minecraft:bubble_column" color="0x8b92dd" opaque="0" liquid="1" solid="0" spawnable="0" /> <!-- *S -->
 	<block id="0x60" name="Trapdoor" uname="minecraft:oak_trapdoor;minecraft:trapdoor" color="0x9e9678" opaque="0" spawnable="0" /> <!-- *S -->
 
-	<block id="0x19B" name="Sea Pickle" uname="minecraft:sea_pickle" color="0x060602" opaque="0" spawnable="0" />
+	
 	<block id="0x89" name="Impluse Command Block" uname="minecraft:impluse_command _block" color="0x060602" opaque="0" spawnable="0" />
 	<block id="0xBC" name="Repeating Command Block" uname="minecraft:repeating_command _block" color="0x060602" opaque="0" spawnable="0" />
+	
 	<!-- block id="0xBD" name="Chain Command Block" uname="minecraft:chain_command _block" color="0x060602" opaque="0" spawnable="0" -->
 </blocklist>
 

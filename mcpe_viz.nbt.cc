@@ -87,6 +87,7 @@ namespace mcpe_viz {
 
   int32_t parseNbtTag( const char* hdr, int& indent, const MyNbtTag& t ) {
 
+      
     logger.msg(kLogInfo1,"%s[%s] ", makeIndent(indent,hdr).c_str(), t.first.c_str());
 
     nbt::tag_type tagType = t.second->get_type();
@@ -233,7 +234,7 @@ namespace mcpe_viz {
         done = true;
       }
     }
-      
+
     // iterate over the tags
     for ( const auto& itt: tagList ) {
       parseNbtTag( hdr, indent, itt );
@@ -268,7 +269,7 @@ namespace mcpe_viz {
       catch (std::exception& e) {
         // check for eof which means all is well
         if ( ! pis.eof() ) {
-          fprintf(stderr, "NBT exception: (%s) (eof=%s) (is=%s)\n"
+          fprintf(stderr, "NBT exception2: (%s) (eof=%s) (is=%s)\n" //flagmaggot having an nbt exception: (Invalid tag type)
                   , e.what()
                   , pis.eof() ? "true" : "false"
                   , (pis) ? "true" : "false"
@@ -414,7 +415,14 @@ namespace mcpe_viz {
       }
     }
     std::string toStringWithImageCoords(int32_t dimId) {
-      return std::string("(" + toString() + " @ image " + toStringImageCoords(dimId) + ")");
+      if(toString()=="")
+      {
+        return std::string("");
+      }
+      else
+      {
+        return std::string("(" + toString() + " @ image " + toStringImageCoords(dimId) + ")");
+      }
     }
   };
 
@@ -1111,9 +1119,15 @@ namespace mcpe_viz {
     // todo - this should probably be multi-line so it's not so insane looking :)
     std::string toString(int32_t forceDimensionId) {
       char tmpstring[1025];
-        
-      std::string s = "[";
-      if ( playerLocalFlag || playerRemoteFlag ) {
+      std::string s = "";
+      if(item.name=="minecraft:gravel")
+      {
+        return s;
+      }
+
+      //std::string s = "[";
+      s = "[";
+      if ( (playerLocalFlag || playerRemoteFlag)) {
         s += "Player";
       } else {
         s += "Mob";
@@ -1121,8 +1135,10 @@ namespace mcpe_viz {
 
       if ( has_key(entityInfoList, idShort) ) {
         s += " Name=" + entityInfoList[idShort]->name;
-      } else {
-        sprintf(tmpstring," Name=(UNKNOWN: id=%d 0x%x)",idShort,idShort);
+      } 
+      
+      else {
+        sprintf(tmpstring," Name=(UNKNOWN: id=%d 0x%x)", idShort,idShort);
         s += tmpstring;
       }
 
@@ -1305,6 +1321,7 @@ namespace mcpe_viz {
       return 0;
     }
     int32_t addMobSpawner ( nbt::tag_compound &tc ) {
+      slogger.msg(kLogInfo1,"ID\n");
       entityId = tc["EntityId"].as<nbt::tag_int>().get();
       // todo - how to interpret entityId? (e.g. 0xb22 -- 0x22 is skeleton, what is 0xb?)
       // todo - any of these interesting?
@@ -1319,6 +1336,7 @@ namespace mcpe_viz {
         0x31-te:   [SpawnCount] 4 0x4 (short)
         0x31-te:   [SpawnRange] 4 0x4 (short)
       */
+      
       return 0;
     }
     std::string toGeoJSON(int32_t forceDimensionId) {
@@ -1894,15 +1912,23 @@ namespace mcpe_viz {
     tileEntityList.clear();
       
     // this could be a list of mobs
+
+
+try
+      {
     for ( size_t i=0; i < tagList.size(); i++ ) { 
 
       bool parseFlag = false;
         
       std::unique_ptr<ParsedTileEntity> tileEntity(new ParsedTileEntity());
       tileEntity->clear();
-        
+      
+      
+
+      
       // check tagList
       if ( tagList[i].second->get_type() == nbt::tag_type::Compound ) {
+       // slogger.msg(kLogInfo1,"Read\n");
         // all is good
       } else {
         fprintf(stderr,"ERROR: parseNbt_tileEntity() called with invalid tagList (loop=%d)\n",(int)i);
@@ -1942,7 +1968,7 @@ namespace mcpe_viz {
               
 
               std::string name = iitem["Name"].as<nbt::tag_string>().get(); //flagmaggot the name is present
-              //if(name == "minecraft:gold_block")
+
 
               int32_t finalID = 0;
               int32_t idFindFinally = findIdByBlockName(name);
@@ -1964,40 +1990,6 @@ namespace mcpe_viz {
               }
               else
                 finalID = idFindFinally;
-
-              // if(idFindFinally <=0)
-              // {
-              //   if(findIdAlternative <=0)
-              //   {
-              //       idFindFinally = findIdByName;
-              //   }
-              //   else
-              //   {
-              //       idFindFinally = findIdAlternative;
-              //   }
-              // }
-              // else if(findIdAlternative > 0)
-              // {
-              //   idFindFinally = findIdAlternative;
-              // }
-              // else if (findIdByName >0)
-              // {
-              //   idFindFinally = findIdByName;
-              // }
-
-
-              // if(idFindFinally <= 0)
-              // {
-              //   idFindFinally = findIdByIdentifier(entityInfoList,name);
-
-              //   if(idFindFinally <= 0)
-              //   {
-              //     idFindFinally = findIdByItemName(name);
-              //   }
-              // }
-
-              //  slogger.msg(kLogWarning, "Word is: %s %d\n", tempstring.c_str(), iter.first);
-
               std::string tempstring = name;
 
               std::regex pattern("minecraft:");
@@ -2068,8 +2060,8 @@ namespace mcpe_viz {
           // todo - anything interesting?
         }
         else if ( tileEntity->id == "MobSpawner" ) {
-          tileEntity->addMobSpawner(tc);
-          parseFlag = true;
+          //tileEntity->addMobSpawner(tc); //flagmaggot look into fixing this
+          //parseFlag = true;
         }
         else if ( tileEntity->id == "DaylightDetector" ) {
           // todo - new for 0.13
@@ -2188,7 +2180,12 @@ namespace mcpe_viz {
         tileEntityList.push_back( std::move(tileEntity) );
       }
     }
-      
+    }
+    catch (int e)
+    {
+slogger.msg(kLogInfo1, "rekt");
+    }
+
     return 0;
   }
 
