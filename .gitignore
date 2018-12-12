@@ -42,3 +42,5 @@ update_win.sh
 *.exe
 *.out
 *.app
+
+.vscode
