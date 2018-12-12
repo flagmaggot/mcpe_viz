@@ -98,6 +98,7 @@
           <ul class="dropdown-menu">
 	    <li><a href="#" class="entityToggle" data-type="P" data-id="19">Bat</a></li>
 	    <li><a href="#" class="entityToggle" data-type="P" data-id="10">Chicken</a></li>
+		<li><a href="#" class="entityToggle" data-type="P" data-id="122">Cat</a></li>
 	    <li><a href="#" class="entityToggle" data-type="P" data-id="11">Cow</a></li>
 	    <li><a href="#" class="entityToggle" data-type="P" data-id="24">Donkey</a></li>
 	    <li><a href="#" class="entityToggle" data-type="P" data-id="23">Horse</a></li>
@@ -108,6 +109,7 @@
 	    <li><a href="#" class="entityToggle" data-type="P" data-id="16">Mooshroom</a></li>
 	    <li><a href="#" class="entityToggle" data-type="P" data-id="25">Mule</a></li>
 	    <li><a href="#" class="entityToggle" data-type="P" data-id="22">Ocelot</a></li>
+		<li><a href="#" class="entityToggle" data-type="P" data-id="123">Panda</a></li>
 	    <li><a href="#" class="entityToggle" data-type="P" data-id="30">Parrot</a></li>
 	    <li><a href="#" class="entityToggle" data-type="P" data-id="12">Pig</a></li>
 	    <li><a href="#" class="entityToggle" data-type="P" data-id="28">Polar Bear</a></li>
