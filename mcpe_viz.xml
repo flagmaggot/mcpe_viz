@@ -1553,6 +1553,8 @@
     <entity id="0x69" ids="minecraft:vex" name="Vex" etype="H" />
 	<entity id="0x6E" ids="minecraft:drowned" name="Drowned" etype="H" />
 	<entity id="0x39" ids="minecraft:vindicator" name="Vindicator" etype="H" /> 
+	<entity id="0x7A" ids="minecraft:cat" name="Cat" etype="P" />
+	<entity id="0x7B" ids="minecraft:panda" name="Panda" etype="P" />
   </entitylist>
 
   <!--

@@ -269,7 +269,7 @@ namespace mcpe_viz {
       catch (std::exception& e) {
         // check for eof which means all is well
         if ( ! pis.eof() ) {
-          fprintf(stderr, "NBT exception2: (%s) (eof=%s) (is=%s)\n" //flagmaggot having an nbt exception: (Invalid tag type)
+          fprintf(stderr, "NBT exception2: (%s) (eof=%s) (is=%s)\n" 
                   , e.what()
                   , pis.eof() ? "true" : "false"
                   , (pis) ? "true" : "false"
@@ -960,6 +960,19 @@ namespace mcpe_viz {
         list.push_back(std::string(tmpstring));
       } else {
 		
+        // if(has_key(entityInfoList,"identifier"))
+        // {
+          // if(has_key(entityInfoList,"identifier"))
+          // {
+
+          // }
+          //std::string name = find
+          //slogger.msg(kLogWarning, "Is it the cat?\n", name.c_str());
+          // }
+
+        // std::string entityName = tc["EntityIdentifier"].as<nbt::tag_string>().get();
+        //           entityId = findIdString(entityInfoList, entityName);
+        //           slogger.msg(kLogInfo1,"Name: %s ID: %d\n",entityName.c_str(),entityId);
 
 		    sprintf(tmpstring,"\"Name\":\"*UNKNOWN1: id=%d 0x%x\"", idShort,idFull);
         list.push_back(std::string(tmpstring));
@@ -1321,8 +1334,23 @@ namespace mcpe_viz {
       return 0;
     }
     int32_t addMobSpawner ( nbt::tag_compound &tc ) {
-      slogger.msg(kLogInfo1,"ID\n");
-      entityId = tc["EntityId"].as<nbt::tag_int>().get();
+      
+      if ( tc.has_key("id") ) 
+      {
+        
+        std::string name = tc["id"].as<nbt::tag_string>().get();
+        if(name == "MobSpawner")
+        {
+          std::string entityName = tc["EntityIdentifier"].as<nbt::tag_string>().get();
+          entityId = findIdString(entityInfoList, entityName);
+          //slogger.msg(kLogInfo1,"Name: %s ID: %d\n",entityName.c_str(),entityId);
+        }
+      }
+      else
+      {
+        //slogger.msg(kLogInfo1,"No\n");
+      }
+      //entityId = tc["EntityId"].as<nbt::tag_int>().get();
       // todo - how to interpret entityId? (e.g. 0xb22 -- 0x22 is skeleton, what is 0xb?)
       // todo - any of these interesting?
       /*
@@ -1654,7 +1682,7 @@ namespace mcpe_viz {
       {
         std::string identifier = tc["identifier"].as<nbt::tag_string>().get();
         int32_t idFindFinally = findIdByIdentifier(entityInfoList, identifier);
-		//slogger.msg(kLogWarning, "Identifier is: %s", identifier.c_str());
+		    //slogger.msg(kLogInfo1, "Identifier is: %s id: %d\n", identifier.c_str(), idFindFinally);
           if(identifier != "minecraft:gravel"){
             entity->idFull = idFindFinally;
             entity->idShort = entity->idFull;// & 0xFF;
@@ -2060,8 +2088,8 @@ try
           // todo - anything interesting?
         }
         else if ( tileEntity->id == "MobSpawner" ) {
-          //tileEntity->addMobSpawner(tc); //flagmaggot look into fixing this
-          //parseFlag = true;
+          tileEntity->addMobSpawner(tc); //flagmaggot look into fixing this
+          parseFlag = true;
         }
         else if ( tileEntity->id == "DaylightDetector" ) {
           // todo - new for 0.13
