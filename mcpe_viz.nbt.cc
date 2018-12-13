@@ -944,6 +944,8 @@ namespace mcpe_viz {
       char tmpstring[1025];
 
       // we make sure that the entity is valid -- have seen rare occurances of mobs with "nan" in pos et al
+
+      
       if ( ! pos.isValid() || ! rotation.isValid() ) {
         logger.msg(kLogInfo1,"WARNING: Not outputting geojson for mob with invalid position/rotation\n");
         return "";
@@ -959,7 +961,7 @@ namespace mcpe_viz {
         sprintf(tmpstring,"\"etype\":\"%s\"", entityInfoList[idShort]->etype.c_str());
         list.push_back(std::string(tmpstring));
       } else {
-		
+		    
         // if(has_key(entityInfoList,"identifier"))
         // {
           // if(has_key(entityInfoList,"identifier"))
@@ -970,9 +972,14 @@ namespace mcpe_viz {
           //slogger.msg(kLogWarning, "Is it the cat?\n", name.c_str());
           // }
 
-        // std::string entityName = tc["EntityIdentifier"].as<nbt::tag_string>().get();
+         //std::string entityName = entityInfoList[idShort]->name.c_str();
         //           entityId = findIdString(entityInfoList, entityName);
-        //           slogger.msg(kLogInfo1,"Name: %s ID: %d\n",entityName.c_str(),entityId);
+                  // slogger.msg(kLogInfo1,"Name: %s ID: %d\n",entityName.c_str());
+
+        // if(!has_key(entityInfoList, -1))
+        // {
+
+        // }
 
 		    sprintf(tmpstring,"\"Name\":\"*UNKNOWN1: id=%d 0x%x\"", idShort,idFull);
         list.push_back(std::string(tmpstring));
@@ -1133,7 +1140,8 @@ namespace mcpe_viz {
     std::string toString(int32_t forceDimensionId) {
       char tmpstring[1025];
       std::string s = "";
-      if(item.name=="minecraft:gravel")
+      //slogger.msg(kLogInfo1,"Item.name: %s id: %d\n", item.name.c_str(), item.id);
+      if(item.name=="minecraft:gravel" || item.id ==-1)
       {
         return s;
       }
@@ -1687,16 +1695,25 @@ namespace mcpe_viz {
       {
         std::string identifier = tc["identifier"].as<nbt::tag_string>().get();
         int32_t idFindFinally = findIdByIdentifier(entityInfoList, identifier);
+
+        //slogger.msg(kLogInfo1, "Identifier is: %d\n", idFindFinally);
 		    //slogger.msg(kLogInfo1, "Identifier is: %s id: %d\n", identifier.c_str(), idFindFinally);
-          if(identifier != "minecraft:gravel"){
-            entity->idFull = idFindFinally;
-            entity->idShort = entity->idFull;// & 0xFF;
-          }
-		  else
-		  {
-		    entity->idFull = 0x0D;
-		    entity->idShort = entity->idFull;// & 0xFF;
-		  }
+        if(identifier != "minecraft:gravel")
+        {
+          entity->idFull = idFindFinally;
+          entity->idShort = entity->idFull;// & 0xFF;
+        }
+        else
+        {
+          entity->idFull = 0x0D;
+          entity->idShort = entity->idFull;// & 0xFF;
+        }
+        if(identifier == "item") //fixes errant data for some reason
+        {
+           entity->idFull = 0x01;
+           entity->idShort = entity->idFull;
+        }
+        
       } else {
         // todonow -this appears to happen for maps
         logger.msg(kLogInfo1,"WARNING: Did not find id or idString for entity! Weird.\n");

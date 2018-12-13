@@ -865,6 +865,8 @@
       <blockvariant blockdata="0x4" name="Observer (East)" />
       <blockvariant blockdata="0x5" name="Observer (West)" />
     </block>
+	<block id="0xFD" name="Bamboo" uname="minecraft:bamboo" /> <!-- todo -->
+	<block id="0xFE" name="Bamboo Sapling" uname="minecraft:bamboo_sapling" /> <!-- todo -->
     <block id="0xFF" name="info_reserved6" uname="minecraft:reserved6" /> <!-- todo -->
 
 	<block id="0x104" name="Stripped Spruce Log" uname="minecraft:stripped_spruce_log" color="0x696d2d" opaque="0" spawnable="0" />
@@ -893,22 +895,22 @@
 	</block>
 	<block id="0xBD" name="kelp" uname="minecraft:kelp" color="0x233410" opaque="0" spawnable="0">
 		<blockvariant blockdata="0x0" name="Kelp" />
-		<blockvariant blockdata="0x0" color="0xDDDDDD" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0x1" color="0xDB7D3E" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0x2" color="0xB350BC" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0x3" color="0x6B8AC9" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0x4" color="0xB1A627" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0x5" color="0x41AE38" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0x6" color="0xD08499" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0x7" color="0x404040" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0x8" color="0x9AA1A1" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0x9" color="0x2E6E89" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0xa" color="0x7E3DB5" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0xb" color="0x2E388D" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0xc" color="0x4F321F" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0xd" color="0x35461B" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0xe" color="0x963430" dcolor="4" name="Kelp" />
-		<blockvariant blockdata="0xf" color="0x191616" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0x0" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0x1" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0x2" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0x3" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0x4" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0x5" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0x6" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0x7" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0x8" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0x9" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0xa" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0xb" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0xc" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0xd" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0xe" color="0x233410" dcolor="4" name="Kelp" />
+		<blockvariant blockdata="0xf" color="0x233410" dcolor="4" name="Kelp" />
 	</block>
 	<block id="0x190" name="Acacia Trapdoor" uname="minecraft:acacia_trapdoor" color="0x69712c" opaque="0" spawnable="0" />
 	<block id="0x191" name="Birch Trapdoor" uname="minecraft:birch_trapdoor" color="0x696d2d" opaque="0" spawnable="0" />
@@ -1578,68 +1580,70 @@
     <biome id="0x09" name="The End" color="0xd1d28a" />
     <biome id="0x0a" name="Frozen Ocean" color="0x0cf5ed" />
     <biome id="0x0b" name="Frozen River" color="0xabedeb" />
-    <biome id="0x0c" name="Ice Plains" color="0xf0f0f0" />
-    <biome id="0x0d" name="Ice Mountains" color="0xe0e0e0" />
-    <biome id="0x0e" name="Mushroom Island" color="0xff1c1c" />
-    <biome id="0x0f" name="Mushroom Island Shore" color="0xff5050" />
+    <biome id="0x0c" name="Snowy Tundra" color="0xf0f0f0" />
+    <biome id="0x0d" name="Snowy Mountains" color="0xe0e0e0" />
+    <biome id="0x0e" name="Mushroom Fields" color="0xff1c1c" />
+    <biome id="0x0f" name="Mushroom Field Shore" color="0xff5050" />
     <biome id="0x10" name="Beach" color="0xffd37e" />
     <biome id="0x11" name="Desert Hills" color="0xd6cd63" />
-    <biome id="0x12" name="Forest Hills" color="0x2e6535" />
+    <biome id="0x12" name="Wooded Hills" color="0x2e6535" />
     <biome id="0x13" name="Taiga Hills" color="0x8ead8c" />
-    <biome id="0x14" name="Extreme Hills Edge" color="0x909090" />
+    <biome id="0x14" name="Mountain Edge" color="0x909090" />
     <biome id="0x15" name="Jungle" color="0x04a51e" />
     <biome id="0x16" name="Jungle Hills" color="0x036c14" />
     <biome id="0x17" name="Jungle Edge" color="0x21ab38" />
     <biome id="0x18" name="Deep Ocean" color="0x3644d8" />
-    <biome id="0x19" name="Stone Beach" color="0x808080" />
-    <biome id="0x1a" name="Cold Beach" color="0xe0e0ff" />
+    <biome id="0x19" name="Stone Shore" color="0x808080" />
+    <biome id="0x1a" name="Snowy Beach" color="0xe0e0ff" />
     <biome id="0x1b" name="Birch Forest" color="0x8af98f" />
     <biome id="0x1c" name="Birch Forest Hills" color="0x90e294" />
-    <biome id="0x1d" name="Roofed Forest" color="0x1f7b23" />
-    <biome id="0x1e" name="Cold Taiga" color="0xd0d0f0" />
-    <biome id="0x1f" name="Cold Taiga Hills" color="0xa0a0c0" />
-    <biome id="0x20" name="Mega Taiga" color="0x45390a" />
-    <biome id="0x21" name="Mega Taiga Hills" color="0x76641b" />
-    <biome id="0x22" name="Extreme Hills+" color="0xb0b0b0" />
+    <biome id="0x1d" name="Dark Forest" color="0x1f7b23" />
+    <biome id="0x1e" name="Snowy Taiga" color="0xd0d0f0" />
+    <biome id="0x1f" name="Snowy Taiga Hills" color="0xa0a0c0" />
+    <biome id="0x20" name="Giant Tree Taiga" color="0x45390a" />
+    <biome id="0x21" name="Giant Tree Taiga Hills" color="0x76641b" />
+    <biome id="0x22" name="Wooded Mountains" color="0xb0b0b0" />
     <biome id="0x23" name="Savanna" color="0x80b21f" />
     <biome id="0x24" name="Savanna Plateau" color="0x9ac548" />
-    <biome id="0x25" name="Mesa" color="0xb75252" />
-    <biome id="0x26" name="Mesa Plateau F" color="0xb76666" />
-    <biome id="0x27" name="Mesa Plateau" color="0xb87474" />
+    <biome id="0x25" name="Badlands" color="0xb75252" />
+    <biome id="0x26" name="Wooded Badlands Plateau" color="0xb76666" />
+    <biome id="0x27" name="Badlands Plateau" color="0xb87474" />
     <biome id="0x7f" name="The Void" color="0x202020" />
-    <biome id="0x80" name="Plains M" color="0x2faf51" />
+    <biome id="0x80" name="Unknown" color="0x2faf51" />
     <biome id="0x81" name="Sunflower Plains" color="0xf8f12c" />
-    <biome id="0x82" name="Desert M" color="0xb8b270" />
-    <biome id="0x83" name="Extreme Hills M" color="0xc0c0c0" />
+    <biome id="0x82" name="Desert Lakes" color="0xb8b270" />
+    <biome id="0x83" name="Gravelly M" color="0xc0c0c0" />
     <biome id="0x84" name="Flower Forest" color="0xfd893c" />
     <biome id="0x85" name="Taiga M" color="0x84c280" />
-    <biome id="0x86" name="Swampland M" color="0x936396" />
-    <biome id="0x8c" name="Ice Plains Spikes" color="0x02cffd" />
-    <biome id="0x95" name="Jungle M" color="0x14e736" />
-    <biome id="0x97" name="JungleEdge M" color="0x3ada54" />
-    <biome id="0x9b" name="Birch Forest M" color="0x9de2a0" />
-    <biome id="0x9c" name="Birch Forest Hills M" color="0x83bb85" />
-    <biome id="0x9d" name="Roofed Forest M" color="0x15901a" />
-    <biome id="0x9e" name="Cold Taiga M" color="0x9090b0" />
-    <biome id="0xa0" name="Mega Spruce Taiga" color="0x538a4d" />
-    <biome id="0xa1" name="Redwood Taiga Hills M" color="0x576c54" />
-    <biome id="0xa2" name="Extreme Hills+ M" color="0xd0d0d0" />
-    <biome id="0xa3" name="Savanna M" color="0x96b25e" />
-    <biome id="0xa4" name="Savanna Plateau M" color="0x7f9652" />
-    <biome id="0xa5" name="Mesa (Bryce)" color="0xd18383" />
-    <biome id="0xa6" name="Mesa Plateau F M" color="0xd19292" />
-    <biome id="0xa7" name="Mesa Plateau M" color="0xb87e7e" />
-	<biome id= "0x28" name="sky_island_low" color="0x8b92dd" />
-	<biome id= "0x29" name="sky_island_medium" color="0x8b92dd" />
-	<biome id= "0x2A" name="sky_island_high" color="0x8b92dd"	/>	
-	<biome id= "0x2B" name="sky_island_barren" color="0x8b92dd" />
-	<biome id= "0x2C" name="warm_ocean" color="0x8b92dd" />
-	<biome id= "0x2D" name="lukewarm_ocean" color="0x8b92dd" />
-	<biome id= "0x2E" name="cold_ocean" color="0x8b92dd" />
-	<biome id= "0x2F" name="warm_deep_ocean" color="0x8b92dd" />
-	<biome id= "0x30" name="lukewarm_deep_ocean" color="0x8b92dd" />
-	<biome id= "0x31" name="cold_deep_ocean" color="0x8b92dd" />
-	<biome id= "0x32" name="frozen_deep_ocean" color="0x8b92dd" />
+    <biome id="0x86" name="Swamp Hills" color="0x936396" />
+    <biome id="0x8c" name="Ice Spikes" color="0x02cffd" />
+    <biome id="0x95" name="Modified Jungle" color="0x14e736" />
+    <biome id="0x97" name="Modified Jungle Edge" color="0x3ada54" />
+    <biome id="0x9b" name="Tall Birch Forest" color="0x9de2a0" />
+    <biome id="0x9c" name="Tall Birch Hills" color="0x83bb85" />
+    <biome id="0x9d" name="Dark Forest Hill" color="0x15901a" />
+    <biome id="0x9e" name="Snowy Taiga M" color="0x9090b0" />
+    <biome id="0xa0" name="Giant Spruce Taiga" color="0x538a4d" />
+    <biome id="0xa1" name="Giant Spruce Taiga Hills" color="0x576c54" />
+    <biome id="0xa2" name="Modified Gravelly M" color="0xd0d0d0" />
+    <biome id="0xa3" name="Shattered Savanna" color="0x96b25e" />
+    <biome id="0xa4" name="Shattered Savanna Plateau" color="0x7f9652" />
+    <biome id="0xa5" name="Eroded Badlands)" color="0xd18383" />
+    <biome id="0xa6" name="Modified Wooded Bandlands Plateau" color="0xd19292" />
+    <biome id="0xa7" name="Modified Badlands Plateau" color="0xb87e7e" />
+	<biome id="0xa8" name="Bamboo Jungle" color="0x04a51e" />
+	<biome id="0xa9" name="Bamboo Jungle Hills" color="0x036c14" />
+	<biome id= "0x28" name="Small End Islands" color="0x8b92dd" />
+	<biome id= "0x29" name="End Midlands" color="0x8b92dd" />
+	<biome id= "0x2A" name="End Highlands" color="0x8b92dd"	/>	
+	<biome id= "0x2B" name="End Barrens" color="0x8b92dd" />
+	<biome id= "0x2C" name="Warm Ocean" color="0x8b92dd" />
+	<biome id= "0x2D" name="Lukewarm Ocean" color="0x8b92dd" />
+	<biome id= "0x2E" name="Cold Ocean" color="0x8b92dd" />
+	<biome id= "0x2F" name="Deep Warm Ocean" color="0x8b92dd" />
+	<biome id= "0x30" name="Deep Lukewarm Ocean" color="0x8b92dd" />
+	<biome id= "0x31" name="Deep Cold Ocean" color="0x8b92dd" />
+	<biome id= "0x32" name="Deep Frozen Ocean" color="0x8b92dd" />
 	<biome id= "0x7F" name="the_void" color="0x0e1c36" />
   </biomelist>
 
