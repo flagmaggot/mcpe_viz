@@ -1333,22 +1333,27 @@ namespace mcpe_viz {
       }
       return 0;
     }
+
+
     int32_t addMobSpawner ( nbt::tag_compound &tc ) {
       
       if ( tc.has_key("id") ) 
       {
-        
+         
         std::string name = tc["id"].as<nbt::tag_string>().get();
+        std::string entityName;
         if(name == "MobSpawner")
         {
-          std::string entityName = tc["EntityIdentifier"].as<nbt::tag_string>().get();
-          entityId = findIdString(entityInfoList, entityName);
-          //slogger.msg(kLogInfo1,"Name: %s ID: %d\n",entityName.c_str(),entityId);
+          if(tc.has_key("EntityIdentifier")) //check to see if there's an EntityIdentifier tied to the spawner
+          {
+            entityName = tc["EntityIdentifier"].as<nbt::tag_string>().get();
+            entityId = findIdString(entityInfoList, entityName);
+          }
         }
       }
       else
       {
-        //slogger.msg(kLogInfo1,"No\n");
+        slogger.msg(kLogInfo1,"No ID Found\n");
       }
       //entityId = tc["EntityId"].as<nbt::tag_int>().get();
       // todo - how to interpret entityId? (e.g. 0xb22 -- 0x22 is skeleton, what is 0xb?)
