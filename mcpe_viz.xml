@@ -731,7 +731,7 @@
       <blockvariant blockdata="0x6" name="Purpur, Pillar (East/West)" />
       <blockvariant blockdata="0xa" name="Purpur, Pillar (North/South)" />
     </block>
-    <block id="0xCB" name="Stairs, Purpur" color="0xf4c4f4" spawnable="0"> <!-- *S --> <!-- 0.17 --> <!-- todo color -->
+    <block id="0xCB" name="Stairs, Purpur" uname="minecraft:purpur_stairs" color="0xf4c4f4" spawnable="0"> <!-- *S --> <!-- 0.17 --> <!-- todo color -->
       <blockvariant blockdata="0x0" name="Stairs, Purpur, East" />
       <blockvariant blockdata="0x1" name="Stairs, Purpur, West" />
       <blockvariant blockdata="0x2" name="Stairs, Purpur, South" />
@@ -893,7 +893,7 @@
 	<block id="0x188" name="Coral Fan" uname="minecraft:coral_fan_hang3" color="0x0e1c40" opaque="0" spawnable="0">
 		<blockvariant blockdata="0x0" name="Coral Fan" />
 	</block>
-	<block id="0xBD" name="kelp" uname="minecraft:kelp" color="0x233410" opaque="0" spawnable="0">
+	<block id="0xBD" name="Kelp" uname="minecraft:kelp" color="0x233410" opaque="0" spawnable="0">
 		<blockvariant blockdata="0x0" name="Kelp" />
 		<blockvariant blockdata="0x0" color="0x233410" dcolor="4" name="Kelp" />
 		<blockvariant blockdata="0x1" color="0x233410" dcolor="4" name="Kelp" />
