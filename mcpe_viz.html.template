@@ -192,6 +192,7 @@
 	    <li><a href="#" class="entityToggle" data-type="O" data-id="98">Minecart with Chest</a></li>
 	    <li><a href="#" class="entityToggle" data-type="O" data-id="96">Minecart with Hopper</a></li>
 	    <li><a href="#" class="entityToggle" data-type="O" data-id="97">Minecart with TNT</a></li>
+		<li><a href="#" class="entityToggle" data-type="O" data-id="69">XP Orb</a></li>
 	    <li role="separator" class="divider"></li>
 	    <li><a href="#" class="featureToggleAddAll" data-type="O">Show All</a></li>
 	    <li><a href="#" class="featureToggleRemoveAll" data-type="O">Hide All</a></li>

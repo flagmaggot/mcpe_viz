@@ -950,6 +950,11 @@ namespace mcpe_viz {
         logger.msg(kLogInfo1,"WARNING: Not outputting geojson for mob with invalid position/rotation\n");
         return "";
       }
+
+      if(idShort == 0x01)
+      {
+        return "";
+      }
       
       double ix, iy;
       worldPointToGeoJSONPoint(forceDimensionId, pos.x,pos.z, ix,iy);
@@ -980,7 +985,7 @@ namespace mcpe_viz {
         // {
 
         // }
-
+        slogger.msg(kLogInfo1,"Item.name: %s id: %d\n", item.name.c_str(), item.id);
 		    sprintf(tmpstring,"\"Name\":\"*UNKNOWN1: id=%d 0x%x\"", idShort,idFull);
         list.push_back(std::string(tmpstring));
       }
@@ -1713,6 +1718,27 @@ namespace mcpe_viz {
            entity->idFull = 0x01;
            entity->idShort = entity->idFull;
         }
+
+        if(identifier == "xp_orb") //fixes errant data for some reason
+        {
+           entity->idFull = 0x45;
+           entity->idShort = entity->idFull;
+        }
+
+        if(identifier=="minecraft:fireball")
+        {
+          //0x181
+          entity->idFull = 0x181;
+           entity->idShort = entity->idFull;
+        }
+
+        if(identifier=="falling_block")
+        {
+          //0x181
+          entity->idFull = 0x42;
+          entity->idShort = entity->idFull;
+        }
+
         
       } else {
         // todonow -this appears to happen for maps
