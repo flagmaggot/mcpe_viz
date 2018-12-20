@@ -929,7 +929,7 @@
 	<block id="0x60" name="Trapdoor" uname="minecraft:oak_trapdoor;minecraft:trapdoor" color="0x9e9678" opaque="0" spawnable="0" /> <!-- *S -->
 
 	
-	<block id="0x89" name="Impluse Command Block" uname="minecraft:impluse_command _block" color="0x060602" opaque="0" spawnable="0" />
+	<block id="0x89" name="Impulse Command Block" uname="minecraft:impulse_command _block" color="0x060602" opaque="0" spawnable="0" />
 	<block id="0xBC" name="Repeating Command Block" uname="minecraft:repeating_command _block" color="0x060602" opaque="0" spawnable="0" />
 	
 	<!-- block id="0xBD" name="Chain Command Block" uname="minecraft:chain_command _block" color="0x060602" opaque="0" spawnable="0" -->
