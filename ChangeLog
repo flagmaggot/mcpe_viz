@@ -4,7 +4,48 @@ by Plethora777
   Twitter: [@Plethora777](https://twitter.com/Plethora777)
   Reddit: [/u/Plethora777](https://www.reddit.com/user/Plethora777/)
 
-Highlight: More fixes new new chunk format
+Highlight: Fixes for new betas
+
+v0.0.48 - 2018.12.30
+More fixes for crashing on --html-all
+
+v0.0.47 - 2018.12.29
+Forgot to build win32 + win64 for v46 :)
+
+v0.0.46 - 2018.12.28
+Fix for repeated "NBT exception" on worlds with mixed old and new chunk format
+Moved "ERROR: Invalid blockid=" from screen log to log file -- underlying issue still needs to be fixed
+Fix Turtle id in web ui
+
+v0.0.45 - 2018.12.28
+Report unmapped remote player id's to the user (make it easier for people to add new playerid mappings)
+Moved water creatures to a separate list on passive mobs; Added Cod, Dolphin and Turtle
+
+v0.0.44 - 2018.12.27
+Another fix for crash on --html-all.  It's still a bit broken in some cases but hopefully will not crash.
+
+v0.0.43 - 2018.12.26
+Fix for crash on --html-all
+
+v0.0.42 - 2018.12.25
+More fixes for new name-based items and blocks
+Detect and avoid problems with block palette in new chunk format
+XML - More fixes for unames and variants; items and entites can have multiple unames
+
+v0.0.41 - 2018.12.25
+More fixes for new name-based items and blocks
+Better detection of block vs item in inventories etc
+XML - Fixed a few typos; added scaffolding (with fake id)
+
+v0.0.40 - 2018.12.24
+More fixes for new name-based items and blocks
+XML - Fixed a few typos
+
+v0.0.39 - 2018.12.23
+Fixes for new name-based items and blocks
+XML - Added uname's for items
+XML - Changed entity ids to uname
+Special thanks to @flagmaggot for pushing in the right direction!
 
 v0.0.38 - 2018.5.23
 Fixes for new new chunk version (v8)
